@@ -1,0 +1,1 @@
+gcc -I src/include -L src/lib -o main.exe main.c src/PuntoMedio.c src/Circuferencia.c src/Elipse.c src/Parabola.c src/Hiperbola.c -lmingw32 -lSDL2main -lSDL2
