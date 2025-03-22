@@ -8,6 +8,17 @@
 #define CENTER_Y (HEIGHT / 2)
 #include "./inc/Algoritmos.h"
 
+void drawAxes(SDL_Renderer* renderer)
+{
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); 
+
+    //eje x
+    SDL_RenderDrawLine(renderer, 0, CENTER_Y, WIDTH, CENTER_Y);
+
+    //eje y
+    SDL_RenderDrawLine(renderer, CENTER_X, 0, CENTER_X, HEIGHT);
+}
+
 int main(int argc, char* argv[]) {
     // Inicializar SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -36,30 +47,27 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 //**********************************CIRCUFERENCIA****************************************** */
-    //int radio;
-    //printf("Teclea el radio de la circuferencia: ");
-    //scanf("%d", &radio);
+    /*int radio;
+    printf("Teclea el radio de la circuferencia: ");
+    scanf("%d", &radio);
+    if(radio <= 0)
+    {
+        printf("ERROR. El valor de radio no puede ser negativo.\n");
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }*/
 //*****************************************ELIPSE****************************************** */
     /*int a, b;
     printf("Teclea el semieje mayor (a) de la elipse: ");
     scanf("%d", &a);
     printf("Teclea el semieje menor (b) de la elipse: ");
-    scanf("%d", &b);*/
+    scanf("%d", &b);
 
-    //int A = (a > b) ? a : b;
-    //int B = (a > b) ? b : a;
-
-    /*if(A == B)
+    if(a <= 0 || b <= 0)
     {
-        printf("ERROR. Los valores tecleados no corresponden a una elipse, si no a una circuferencia.\n");
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        SDL_Quit();
-        return 1;
-    }
-    else if(B > abs((A / 2)))
-    {
-        printf("ERROR. EL UMBRAL ES DEMASIADO GRANDE. 'b' debe ser menor o igual que la mitad de 'a'.\n");
+        printf("ERROR. Los valores tecleados no son validos para una elipse.\n");
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
@@ -67,9 +75,9 @@ int main(int argc, char* argv[]) {
     }*/
 
 //*****************************************PARABOLA****************************************** */
-    int p;
-    printf("Teclea el parametro de abertura de la parabolo: ");
-    scanf("%d", &p);
+    //int p;
+    //printf("Teclea el parametro de abertura de la parabola: ");
+    //scanf("%d", &p);
 
     // Bucle principal
     int running = 1;
@@ -83,31 +91,29 @@ int main(int argc, char* argv[]) {
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
+        drawAxes(renderer);
 
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Rojo para destacar el centro
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
         SDL_RenderDrawPoint(renderer, CENTER_X, CENTER_Y);
 //**********************************RECTA****************************************** */
         //x0 = 400      x1 = 300
         //y0 = 400      y1 = 300
         //drawLine(renderer, 0, 0, 300, 300);
-
 //**********************************CIRCUFERENCIA****************************************** */
-        //SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
         //CircleSecondOrderDifference(renderer,0, 0, radio);
-        //CircleSecondOrderDifference(renderer,0, 0, 200);
+        //CircleSecondOrderDifference(renderer,0, 0, 300);
 //**********************************ELIPSE****************************************** */
-        //SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
         //if(a == b) _exit;
         //drawEllipse(renderer, CENTER_X, CENTER_Y, a, b);
-        //drawEllipse(renderer, 0, 0, 300, 250);
+        //drawEllipse(renderer, CENTER_X, CENTER_Y, 300, 150);
 //**********************************PARABOLA****************************************** */
         //SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-        drawParabola(renderer, p);
-        //drawParabola(renderer, CENTER_X, CENTER_Y, p);
+        //drawParabola(renderer, p);
         //drawParabola(renderer, 200);
+        
 //**********************************HIPERBOLA****************************************** */
-        //a = 100       b = 50
-        //drawHyperbola(renderer, 50, 50, CENTER_X, CENTER_Y);
+        //a = 50       b = 50
+        drawHyperbola(renderer, 50, 50, CENTER_X, CENTER_Y);
 
         SDL_RenderPresent(renderer);
     }

@@ -3,7 +3,6 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 /*
-//EJEMPLO
 x = 0;
 y = b;
 
@@ -41,7 +40,7 @@ while(y > 0)
 		y = y-1
 	Pintar4Pixeles(x,y)*/
 
-//dibuja un punto y las simetrias en los 4 cuadrantes
+//dibuja un punto y las simetrias de los 4 cuadrantes
 void PointsElipse(SDL_Renderer* renderer, int xc, int yc, int x, int y)
 {
     SDL_RenderDrawPoint(renderer, xc + x, yc + y);
@@ -60,7 +59,6 @@ void drawEllipse(SDL_Renderer* renderer, int xc, int yc, double a, double b)
     double d1 = (b*b)-(a*a*b)+(0.25*a*a);
     //int dx = 2 * b2 * x;
     //int dy = 2 * a2 * y;
-    //int dx = (a2*(y-0.5) > b2*(x+1));
 
     //PointsElipse(renderer, xc, yc, x, y);
 

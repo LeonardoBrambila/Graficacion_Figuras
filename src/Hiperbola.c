@@ -13,11 +13,14 @@ void print_pixel(SDL_Renderer* renderer, int x, int y, int x1, int y1)
 
 void drawHyperbola(SDL_Renderer* renderer, int a, int b, int x1, int y1)
 {
+    a = abs(a);
+    b = abs(b);
     int x = a;
     int y = 0;
     int d = 2 * a * a - 2 * a * b * b - b * b;
     
     while(y <= (b * b * x) / (a * a))
+    //while ((x * x) * (b * b) <= (y * y) * (a * a) + (a * a * b * b))
     {
         print_pixel(renderer, x, y, x1, y1);
         if(d < 0) d += 2 * a * a * (2 * y + 3);
@@ -31,7 +34,7 @@ void drawHyperbola(SDL_Renderer* renderer, int a, int b, int x1, int y1)
     
     int init = 100;
     while(init--)
-        {
+    {
         if(d < 0) d += 2 * b * b * (3 + 2 * x);
         else
         {

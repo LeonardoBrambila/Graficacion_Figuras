@@ -2,28 +2,40 @@
 #include <stdlib.h>
 #include <math.h>
 #include <SDL2/SDL.h>
+
 #define WIDTH 800
 #define HEIGHT 800
 #define CENTER_X (WIDTH / 2)
 #define CENTER_Y (HEIGHT / 2)
 
-void PlotPoint_PARABOLA(SDL_Renderer* renderer, int x, int y)
+void PlotPoint_PARABOLA(SDL_Renderer* renderer, int x, int y, int p)
 {
-    SDL_RenderDrawPoint(renderer, CENTER_X + x, CENTER_Y + y); // Cuadrante superior
-    SDL_RenderDrawPoint(renderer, CENTER_X - x, CENTER_Y + y); // Cuadrante inferior
+    if(p < 0)
+    {
+        SDL_RenderDrawPoint(renderer, CENTER_X + x, CENTER_Y + y); //cuadrante superior
+        SDL_RenderDrawPoint(renderer, CENTER_X - x, CENTER_Y + y);
+    }
+    else
+    {
+        SDL_RenderDrawPoint(renderer, CENTER_X + x, CENTER_Y - y); //cuadrante inferior
+        SDL_RenderDrawPoint(renderer, CENTER_X - x, CENTER_Y - y);
+    }
 }
 
 void drawParabola(SDL_Renderer* renderer, int p)
 {
-    int x = 0, y = 0;
-    int d = 1 - p; 
-    int p2 = 2 * p;
+    int x = 0;
+    int y = 0;
+    int absP = abs(p);
+    int d = 1 - absP;
+    int p2 = 2 * absP;
     int p4 = 2 * p2;
 
-    // Primera región: Mientras x < p (zona inicial)
-    while (x < p && y <= CENTER_Y)
+    //REGION1
+    // si x < |p|
+    while (x < absP && y <= CENTER_Y)
     {
-        PlotPoint_PARABOLA(renderer, x, y);
+        PlotPoint_PARABOLA(renderer, x, y, p);
         if (d >= 0)
         {
             y++;
@@ -33,7 +45,7 @@ void drawParabola(SDL_Renderer* renderer, int p)
         d += 2 * x + 1;
     }
 
-    // Segunda región: cuando la curvatura se vuelve más vertical
+    //REGION2
     if (d == 1) 
         d = 1 - p4;
     else 
@@ -41,7 +53,7 @@ void drawParabola(SDL_Renderer* renderer, int p)
 
     while (y <= CENTER_Y)
     {
-        PlotPoint_PARABOLA(renderer, x, y);
+        PlotPoint_PARABOLA(renderer, x, y, p);
         if (d <= 0)
         {
             x++;

@@ -78,16 +78,15 @@ void CircleSecondOrderDifference(SDL_Renderer* renderer, int xc, int yc, int r)
 {
     int x = 0;
     int y = r;
-    int p = 1 - r;//Decision inicial
+    int p = 1 - r;//decision inicial
     int deltaE = 3;
     int deltaSE = 5 - 2 * r;
     //int delta2E = 2;
     //int delta2SE = 2;
 
-    //Dibuja el primer grupo de puntos
+    //primer grupo de puntos
     PlotPoint(renderer, xc, yc, x, y);
 
-    //Ciclo que debe de iterar hasta que x llegue a y
     while(x < y)
     {
         //x++;
